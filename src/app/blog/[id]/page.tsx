@@ -1,7 +1,6 @@
+import { Callbox } from "@/app/components/Callbox";
 import { Chatbox } from "@/app/components/Chatbox";
-import { socket } from "@/utils/socket";
 import { NextApiRequest, NextApiResponse } from "next";
-import { FormEvent } from "react";
 
 export async function handler(
   req: NextApiRequest,
@@ -11,12 +10,13 @@ export async function handler(
 }
 
 export default function Blog(params: any) {
-    const { params: ss } = params;
+  const { params: ss } = params;
 
-    return (
-        <div>
-            <h1>Blog {ss.id}</h1>
-            <Chatbox />
-        </div>
-    )
+  return (
+    <div className="flex flex-row">
+      {/* <h1>Blog {ss.id}</h1> */}
+      <Callbox />
+      <Chatbox />
+    </div>
+  )
 }

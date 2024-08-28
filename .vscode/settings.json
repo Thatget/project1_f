@@ -1,5 +1,0 @@
-{
-    "reactSnippets.settings.prettierEnabled": true,
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "editor.tabSize": 2
-}

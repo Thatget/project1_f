@@ -4,7 +4,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <NavLinks />
-      <main>{children}</main>
+      <main className="container mx-auto">{children}</main>
     </>
   )
 }
