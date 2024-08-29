@@ -1,5 +1,5 @@
-import { Callbox } from "@/app/components/Callbox";
-import { Chatbox } from "@/app/components/Chatbox";
+import { CallBox } from "@/app/components/CallBox";
+import { ChatBox } from "@/app/components/ChatBox";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function handler(
@@ -15,8 +15,8 @@ export default function Blog(params: any) {
   return (
     <div className="flex flex-row">
       {/* <h1>Blog {ss.id}</h1> */}
-      <Callbox />
-      <Chatbox />
+      <CallBox />
+      {/* <ChatBox /> */}
     </div>
   )
 }

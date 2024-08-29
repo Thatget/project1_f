@@ -3,7 +3,7 @@
 import { socket } from "@/utils/socket";
 import { FormEvent, useEffect } from "react";
 
-export const Chatbox = () => {
+export const ChatBox = () => {
 
   useEffect(() => {
     socket.connect();
