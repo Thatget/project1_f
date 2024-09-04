@@ -9,14 +9,14 @@ export async function handler(
   res.status(200).json({ id: 12 })
 }
 
-export default function Blog(params: any) {
+export default function User(params: any) {
   const { params: ss } = params;
 
   return (
     <div className="flex flex-row">
       {/* <h1>Blog {ss.id}</h1> */}
       <CallBox />
-      {/* <ChatBox /> */}
+      <ChatBox />
     </div>
   )
 }

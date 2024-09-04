@@ -23,15 +23,20 @@ export const ChatBox = () => {
   }
 
   return (
-    <div className="bg-gray-700 basis-2/4 flex flex-col-reverse h-screen">
-      <form onSubmit={handleSend} >
-        <div className="relative w-full">
-          <input className="w-full" />
-          <button className="absolute right-0" type="submit">Send</button>
+    <div className="basis-2/4 h-screen relative" >
+      <div className="fixed z-10 bg-gray-50">
+        <div>Info</div>
+      </div>
+      <div className="flex flex-col-reverse">
+        <form onSubmit={handleSend} >
+          <div className="relative w-full">
+            <input className="w-full" />
+            <button className="absolute right-0" type="submit">Send</button>
+          </div>
+        </form>
+        <div>
+          chat content !
         </div>
-      </form>
-      <div>
-        chat content !
       </div>
     </div>
   )
