@@ -7,7 +7,7 @@ export async function handler(
   res.status(200).json({ id: 12 })
 }
 
-export default function Blog(params: any) {
+export default function LoginPage(params: any) {
   const { params: ss } = params;
 
   return (
