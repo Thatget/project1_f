@@ -1,16 +1,34 @@
 import prisma from '@/app/lib/prisma'
-import { hash } from 'bcrypt-ts';
+import { User } from '@prisma/client';
+import { hash, compare } from 'bcrypt-ts';
 
-export async function getUser(nickName: string) {
+type TRUser = Omit<User, 'password'>;
+
+export async function getUser(nickName: string, password: string): Promise<{data: TRUser| null}> {
   try {
     const user = await prisma.user.findUnique({
       where: {
       nickName: nickName
     }
   })
-  return { data: user}
+
+  if (!user) {
+    return {
+      data: null
+    }
+  }
+  const isValidatePassword = await compare(password, user.password);
+
+  if (!isValidatePassword) {
+    return {
+      data: null
+    }
+  }
+
+  const { password: _, ...userWithoutPassword } = user;
+  return { data: userWithoutPassword };
   } catch (error) {
-    return {user: null}
+    return {data: null}
   }
 }
 
@@ -29,7 +47,8 @@ export async function createUser(nickName: string, email: string, password: stri
         data: {
           exit: true,
           user
-      } }
+        }
+      }
     }
 
     const hashedPassword = await hash(password, 10);

@@ -44,7 +44,7 @@ export const CallBox = () => {
   }, [stream]);
 
   return (
-    <div className="basis-2/4 bg-slate-500">
+    <div className="bg-slate-500">
       <form>
         <VideoPlayer stream={stream} playing={true} />
         <VideoPlayer stream={remoteStream} playing={false} />
