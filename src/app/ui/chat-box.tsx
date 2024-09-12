@@ -23,7 +23,7 @@ export const ChatBox = () => {
   }
 
   return (
-    <div className="h-screen relative" >
+    <div className="h-screen relative flex-grow-0" >
       <div className="fixed z-10 bg-gray-50">
         <div>Info</div>
       </div>

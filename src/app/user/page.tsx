@@ -1,5 +1,5 @@
-import { CallBox } from "@/app/components/CallBox";
-import { ChatBox } from "@/app/components/ChatBox";
+import { CallBox } from "@/app/ui/call-box";
+import { ChatBox } from "@/app/ui/chat-box";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export async function handler(

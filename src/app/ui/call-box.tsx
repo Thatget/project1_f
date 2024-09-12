@@ -2,7 +2,7 @@
 
 import { socket } from "@/utils/socket";
 import { useCallback, useEffect, useState } from "react";
-import VideoPlayer from "./VideoPlayer";
+import VideoPlayer from "./video-player";
 
 export const CallBox = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -44,7 +44,7 @@ export const CallBox = () => {
   }, [stream]);
 
   return (
-    <div className="bg-slate-500">
+    <div className="bg-slate-500 flex-grow">
       <form>
         <VideoPlayer stream={stream} playing={true} />
         <VideoPlayer stream={remoteStream} playing={false} />
