@@ -1,24 +1,15 @@
 'use server'
 
-import { LoginFormSchema, SignupFormSchema } from '@/app/lib/definitions';
+import { SignupFormSchema } from '@/app/lib/definitions';
 import { redirect } from 'next/navigation';
 import { createSession, deleteSession } from '@/app/lib/session';
 import { getUser, createUser } from '@/app/models/user.model';
 
 export async function login(state: any, formData: FormData) {
 
-  const validatedFields = LoginFormSchema.safeParse({
-    name: formData.get('name'),
-    password: formData.get('password')
-  })
-  // If any form fields are invalid, return early
-  if (!validatedFields.success) {
-    return {
-      errors: validatedFields.error.flatten().fieldErrors,
-    }
-  }
+  const name = formData.get('name')?.toString()?? "";
+  const password = formData.get('password')?.toString() ?? "";
 
-  const { name, password } = validatedFields.data;
   const { data: user } = await getUser(name, password);
 
   if (!user) {

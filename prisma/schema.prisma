@@ -14,12 +14,48 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  nickName    String @unique
-  email       String @unique
-  password    String @unique
-  displayName String? @map("display_name")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  nickName        String          @unique
+  email           String          @unique
+  password        String
+  status          String?
+  displayName     String?         @map("display_name")
+  groupIds        String[]        @db.ObjectId
+  groups          Group[]         @relation(fields: [groupIds], references: [id])
+  messageChatIds  String[]        @db.ObjectId
+  messageChats    MessageChat[]   @relation(fields: [messageChatIds], references: [id])
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
   @@map("users")
+}
+
+model Message {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  content         String
+  userId          String          @db.ObjectId
+  groupId         String?         @db.ObjectId
+  messageChatId   String          @db.ObjectId
+  messageChat MessageChat         @relation(fields: [messageChatId], references: [id])
+  createdAt   DateTime            @default(now()) @map("created_at")
+  updatedAt   DateTime            @updatedAt @map("updated_at")
+}
+
+model Group {
+  id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  userIDs               String[]            @db.ObjectId
+  users                 User[]              @relation(fields: [userIDs], references: [id])
+  createdAt             DateTime            @default(now()) @map("created_at")
+  updatedAt             DateTime            @updatedAt @map("updated_at")
+  messageChats          MessageChat[]
+  @@map("groups")
+}
+
+model MessageChat {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  userIds     String[]    @db.ObjectId
+  users       User[]      @relation(fields: [userIds], references: [id])
+  groupId     String?      @db.ObjectId
+  group       Group?       @relation(fields: [groupId], references: [id])
+  messages    Message[]
+  @@map("message_chat")
 }

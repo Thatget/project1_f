@@ -1,6 +1,6 @@
-import { CallBox } from "@/app/ui/call-box";
 import { ChatBox } from "@/app/ui/chat-box";
 import { NextApiRequest, NextApiResponse } from "next";
+import { SideInfo } from "../ui/side-info"
 
 export async function handler(
   req: NextApiRequest,
@@ -13,9 +13,9 @@ export default function User(params: any) {
   const { params: ss } = params;
 
   return (
-    <div className="flex flex-row">
-      <CallBox />
-      <ChatBox />
+    <div className="h-full flex flex-row" >
+      <ChatBox chatId={""} />
+      <SideInfo />
     </div>
   )
 }

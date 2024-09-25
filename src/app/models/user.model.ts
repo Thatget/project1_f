@@ -5,6 +5,26 @@ import { hash, compare } from 'bcrypt-ts';
 export type TRUser = Omit<User, 'password'>;
 type TOderBy = 'desc' | 'asc';
 
+export async function getUserById(userId: string): Promise<{data: TRUser| null}> {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+      id: userId
+    }
+  })
+
+  if (!user) {
+    return {
+      data: null
+    }
+  }
+  const { password: _, ...userWithoutPassword } = user;
+  return { data: userWithoutPassword };
+  } catch (error) {
+    return {data: null}
+  }
+}
+
 export async function getUser(nickName: string, password: string): Promise<{data: TRUser| null}> {
   try {
     const user = await prisma.user.findUnique({
@@ -78,8 +98,7 @@ export async function getUsers(start: number, size: number, orderBy: TOderBy ): 
       orderBy: {
         displayName: orderBy
       }
-    })
-
+    });
     if (!users) {
       return {
         data: null
