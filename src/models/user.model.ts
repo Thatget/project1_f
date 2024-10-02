@@ -1,4 +1,4 @@
-import prisma from '@/app/lib/prisma'
+import prisma from '@/src/lib/prisma'
 import { User } from '@prisma/client';
 import { hash, compare } from 'bcrypt-ts';
 

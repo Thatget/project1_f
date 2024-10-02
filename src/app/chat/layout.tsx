@@ -1,22 +1,12 @@
-import { NavLinks } from '@/app/ui/nav-links';
-import { AsideLinks } from '@/app/ui/aside-links';
-import { cookies } from 'next/headers';
-import { getUserInfo } from '@/app/lib/dtl';
+import { getUserInfo } from '@/src/lib/dtl';
+import { AsideLinks } from '../ui/aside-links';
+import { NavLinks } from '../ui/nav-links';
 
-export default async function Layout({
-  children,
-  params: { slug },
-}: {
-  children: React.ReactNode;
-  params: { slug: string };
-}) {
-  if (slug) {
-    const data = await getUserInfo();
-    console.log('data: ', data);
-  }
+export default async function Layout({ children }: { children: React.ReactNode; params: { slug: string } }) {
+  const data = await getUserInfo();
   return (
     <div className="bg-orange-200">
-      <NavLinks />
+      <NavLinks user={data} />
       <div className="flex w-full" style={{ height: 'calc(100vh - 3rem)' }}>
         <div className="md:basis-1/4">
           <AsideLinks />

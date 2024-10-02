@@ -1,13 +1,13 @@
-import prisma from '@/app/lib/prisma';
-import { ChatBox } from '@/app/ui/chat-box';
-import { SideInfo } from '@/app/ui/side-info';
+import prisma from '@/src/lib/prisma';
+import { ChatBox } from '@/src/app/ui/chat-box';
+import { SideInfo } from '@/src/app/ui/side-info';
 import { unstable_cache } from 'next/cache';
 
 export default async function GroupChat(params: any) {
   const {
     params: { slug },
   } = params;
-  const chatId: String = slug ?? '';
+  const chatId: string = slug ?? '';
   const detectChat = unstable_cache(
     async () => {
       const chatMessage = await prisma.messageChat.findUnique({ where: { id: String(slug) } });

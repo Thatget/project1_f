@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { useFormState } from "react-dom"
-import { login } from "@/app/actions/auth";
+import { useFormState } from 'react-dom';
+import { login } from '../actions/auth';
 
 export default function Page() {
   const [state, formAction] = useFormState(login, null);
@@ -21,10 +21,16 @@ export default function Page() {
           </div>
           <div className="p-2 flex justify-between items-center bg-slate-100">
             <button className="bg-red-600 text-white p-2 rounded-lg">Cancel</button>
-            <p>Forgot <a href="#" className="text-red-700 underline">password</a>?</p>
+            <p>
+              Forgot{' '}
+              <a href="#" className="text-red-700 underline">
+                password
+              </a>
+              ?
+            </p>
           </div>
         </form>
       </div>
     </div>
-  )
+  );
 }

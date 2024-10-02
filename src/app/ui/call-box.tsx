@@ -1,8 +1,8 @@
 'use client';
 
-import { socket } from "@/utils/socket";
-import { useCallback, useEffect, useState } from "react";
-import VideoPlayer from "./video-player";
+import { socket } from '@/src/utils/socket';
+import { useCallback, useEffect, useState } from 'react';
+import VideoPlayer from './video-player';
 
 export const CallBox = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
@@ -15,10 +15,9 @@ export const CallBox = () => {
         audio: true,
       });
       setStream(localVideo);
-    }
+    };
     getStream();
   }, []);
-  
 
   useEffect(() => {
     socket.connect();
@@ -28,18 +27,18 @@ export const CallBox = () => {
     return () => {
       socket.off('call:answer');
       socket.disconnect();
-    }
+    };
   }, []);
 
   const handleSend = useCallback(() => {
     if (stream) {
       const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'video/webm; codecs=vp9'
+        mimeType: 'video/webm; codecs=vp9',
       });
       mediaRecorder.ondataavailable = (event) => {
         socket.emit('call', event.data);
       };
-      mediaRecorder.start(100); 
+      mediaRecorder.start(100);
     }
   }, [stream]);
 
@@ -49,8 +48,10 @@ export const CallBox = () => {
         <VideoPlayer stream={stream} playing={true} />
         <VideoPlayer stream={remoteStream} playing={false} />
         <button>End</button>
-        <button type="button" onClick={handleSend}>Call</button>
+        <button type="button" onClick={handleSend}>
+          Call
+        </button>
       </form>
     </div>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { signup } from "@/app/actions/auth"
-import { useFormState } from "react-dom"
+import { signup } from '@/src/app/actions/auth';
+import { useFormState } from 'react-dom';
 
 export default function SignupForm() {
   const [state, formAction] = useFormState(signup, null);
@@ -31,9 +31,11 @@ export default function SignupForm() {
         </div>
         <div className="flex justify-between p-3 items-center">
           <button className="text-white bg-red-700 p-1 rounded-lg">Cancel</button>
-          <div>forgot <a href="#">password</a></div>
+          <div>
+            forgot <a href="#">password</a>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

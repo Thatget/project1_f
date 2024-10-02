@@ -1,9 +1,9 @@
 'use server'
 
-import { SignupFormSchema } from '@/app/lib/definitions';
+import { SignupFormSchema } from '@/src/lib/definitions';
 import { redirect } from 'next/navigation';
-import { createSession, deleteSession } from '@/app/lib/session';
-import { getUser, createUser } from '@/app/models/user.model';
+import { createSession, deleteSession } from '@/src/lib/session';
+import { getUser, createUser } from '@/src/models/user.model';
 
 export async function login(state: any, formData: FormData) {
 

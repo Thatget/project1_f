@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getUsers, TRUser } from "../../models/user.model";
+import { getUsers, TRUser } from "../../../models/user.model";
 
 export const dynamic = 'force-static'
  

@@ -30,14 +30,14 @@ model User {
 }
 
 model Message {
-  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  id              String              @id @default(auto()) @map("_id") @db.ObjectId
   content         String
-  userId          String          @db.ObjectId
-  groupId         String?         @db.ObjectId
-  messageChatId   String          @db.ObjectId
-  messageChat MessageChat         @relation(fields: [messageChatId], references: [id])
-  createdAt   DateTime            @default(now()) @map("created_at")
-  updatedAt   DateTime            @updatedAt @map("updated_at")
+  userId          String              @db.ObjectId
+  groupId         String?             @db.ObjectId
+  messageChatId   String              @db.ObjectId
+  messageChat     MessageChat         @relation(fields: [messageChatId], references: [id])
+  createdAt       DateTime            @default(now()) @map("created_at")
+  updatedAt       DateTime            @updatedAt @map("updated_at")
 }
 
 model Group {
