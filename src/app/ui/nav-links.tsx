@@ -4,7 +4,7 @@ import Link from 'next/link';
 // import { usePathname } from 'next/navigation';
 
 export function NavLinks(user: any) {
-  console.log('nav-link: ', user);
+  console.log('nav-link: ', user.id);
   return (
     <nav className="sticky top-0 w-full h-12 bg-slate-50 flex items-center z-50">
       <div className="w-12">

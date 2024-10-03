@@ -21,7 +21,9 @@ export default async function UserChat(params: any) {
         });
         return messageChat;
       } catch (error) {
-        return null;
+        return {
+          id: null,
+        };
       }
     },
     [slug],

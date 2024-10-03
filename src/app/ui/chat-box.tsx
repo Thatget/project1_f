@@ -3,11 +3,13 @@
 import { socket } from '@/src/utils/socket';
 import { useParams, usePathname } from 'next/navigation';
 import { KeyboardEvent, useCallback, useEffect, useState } from 'react';
+import { ChatBoxContent } from './chat-box-content';
 
 type TChatBoxType = {
   authId?: string | null;
   chatId?: string | null;
 };
+
 export const ChatBox = ({ authId, chatId }: TChatBoxType) => {
   const [message, setMessage] = useState('');
   const router = usePathname();
@@ -19,18 +21,12 @@ export const ChatBox = ({ authId, chatId }: TChatBoxType) => {
     userId = slug;
   } else if (router.startsWith('/chat/g/')) {
     groupId = slug;
-  } else {
-    chatId = slug;
   }
 
   useEffect(() => {
     socket.connect();
     socket.emit('join', authId);
-    socket.on('message', (data) => {
-      console.log('Answer received: ', data);
-    });
     return () => {
-      socket.off('message');
       socket.disconnect();
     };
   }, []);
@@ -64,8 +60,8 @@ export const ChatBox = ({ authId, chatId }: TChatBoxType) => {
   return (
     <div className="relative w-full flex-grow-0 p-2 m-2 bg-white rounded-2xl">
       <div className="h-full">
-        <div className="flex flex-col-reverse overflow-auto" style={{ height: 'calc(100% - 3rem)' }}>
-          <div>chat content !</div>
+        <div style={{ height: 'calc(100% - 3rem)' }}>
+          <ChatBoxContent authId={authId} chatId={chatId} />
         </div>
         <div className="sticky bottom-0 mb-8 h-12">
           <div className="relative w-full">

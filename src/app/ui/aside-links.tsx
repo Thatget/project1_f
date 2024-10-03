@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { TRUser } from '../../models/user.model';
-import { BiSearchAlt } from 'react-icons/bi';
+import { BiFace, BiSearchAlt } from 'react-icons/bi';
 
 export function AsideLinks() {
   const [users, setUsers] = useState<TRUser[] | []>([]);
@@ -33,13 +33,16 @@ export function AsideLinks() {
             </div>
           </form>
         </div>
-        {users.map((user, index) => {
-          return (
-            <div key={index} className="w-full">
-              <Link href={`/chat/u/${user.id}`}>{user.nickName}</Link>
-            </div>
-          );
-        })}
+        <div className="flex flex-col pt-3">
+          {users.map((user, index) => {
+            return (
+              <Link href={`/chat/u/${user.id}`} key={index} className="w-full hover:bg-gray-300 rounded-3xl p-2 flex ">
+                <BiFace size={'25'} />
+                <p className="pl-2">{user.nickName}</p>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </aside>
   );

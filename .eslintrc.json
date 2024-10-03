@@ -1,3 +1,17 @@
 {
-  "extends": ["next", "prettier"]
+  "extends": [
+    "eslint:recommended",
+    "next",
+    "eslint-config-prettier",
+    "prettier",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@next/next/recommended"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  }
 }

@@ -1,25 +1,21 @@
 import { User } from '@prisma/client';
+import prisma from '../lib/prisma';
 
 export type TRUser = Omit<User, 'password'>;
 type TOderBy = 'desc' | 'asc';
 
-export async function getUserfff(nickName: string, password: string): Promise<{data: TRUser| null}> {
+export async function getChatContent(chatId: string,skip: number, take: number ) {
   try {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(
-          {data: null}
-        );
-      }, 300);
+    const messages = await prisma.message.findMany({
+      skip,
+      take,
+      where: {
+        messageChatId: chatId
+      }
     });
+    return messages;
   }
   catch (error) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(
-          {data: null}
-        );
-      }, 300);
-    });
+    return null;
   }
 }

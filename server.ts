@@ -23,13 +23,22 @@ appNext.prepare().then(() => {
 
   io.on("connection", (socket) => {
     socket.on('join', (authId)=> {
-      console.log("authId:      ", authId);
       socket.join(authId);
     });
     socket.on('message', async ({data}) => {
       try {
-        const messageChat = await insertChat(data.senderId, data.message, data.messageId, data.recipientId);
-        socket.to(data.recipientId).emit('message', data);
+        const messageChat = await insertChat(
+          data.senderId,
+          data.message,
+          data.messageId,
+          data.recipientId,
+          data.groupId
+        );
+        if (messageChat) {
+          socket.to(data.recipientId || data.groupId).emit("message", messageChat);
+        } else {
+          socket.emit("error", "Message could not be sent");
+        }
       } catch(error) {
         socket.to(data.senderId).emit('error',"lỗi gởi tin nhắn!");
       }
@@ -50,13 +59,21 @@ async function insertChat(userId: string, content: string, messageChatId: string
   try {
     console.log(userId, recipientId);
     let chat = null;
+    // Handle one-to-one chat
     if (recipientId) {
       // const recipienUser = await prisma.user.findUnique({where: {id: recipientId}});
       chat = await prisma.messageChat.findFirst({
         where: { userIds: { hasEvery: [recipientId, userId] } },
       });
-      if (!chat) {
-        console.log("SSSSSSSSS:SA");
+      if (chat) {
+        const message = await prisma.message.create({
+          data: {
+            userId,
+            content,
+            messageChatId: chat.id
+          }});
+        return message;
+      } else {
         const chat = await prisma.messageChat.create({
           data: {
             userIds: [userId,  recipientId],
@@ -74,16 +91,8 @@ async function insertChat(userId: string, content: string, messageChatId: string
           }
         });
         return message;
-      } else {
-        const message = await prisma.message.create({
-          data: {
-            userId,
-            content,
-            messageChatId
-          }
-        });
-        return message;
       }
+      // Handle group chat
     } else if (groupId) {
       // const group = await prisma.group.findUnique({where: {id: groupId}});
       chat = await prisma.messageChat.findFirst({

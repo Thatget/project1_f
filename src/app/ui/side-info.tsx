@@ -30,16 +30,16 @@ export function SideInfo() {
         { id: 0, title: 'Tắt thông báo', link: '/setting' },
         { id: 1, title: 'Tin nhắn tự hủy', link: '/setting' },
         { id: 2, title: 'Xác minh mã hóa đàu cuối', link: '/setting' },
-        { id: 2, title: 'Hạn chế', link: '/setting' },
-        { id: 2, title: 'Chặn', link: '/setting' },
-        { id: 2, title: 'Báo cáo', link: '/setting' },
+        { id: 3, title: 'Hạn chế', link: '/setting' },
+        { id: 4, title: 'Chặn', link: '/setting' },
+        { id: 5, title: 'Báo cáo', link: '/setting' },
       ],
     },
   ];
 
   return (
-    <div className="flex flex-col m-2 bg-white p-2 rounded-2xl">
-      <div className="overflow-y-scroll">
+    <div className="flex flex-col m-2 bg-white p-2 rounded-2xl overflow-y-scroll">
+      <div className="">
         <img
           src={
             'https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-1/456909750_3802471409994234_4035674451251586238_n.jpg?stp=dst-jpg_s100x100&_nc_cat=106&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeGVejSdud7Ok8nxrGDlXaCqU9b_wg8kucxT1v_CDyS5zK7PLHVCQrejhu5_ItT8cCUabdHvCL-YdWAoRcoxDdhe&_nc_ohc=KlBqh_CQu0EQ7kNvgF8d3rL&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fhan17-1.fna&oh=00_AYDHrqEXc2SKY5QyBOGuqD6GH3iyV_rlmyu2MX05qHKhYg&oe=66FC8264'

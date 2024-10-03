@@ -18,6 +18,7 @@ model User {
   nickName        String          @unique
   email           String          @unique
   password        String
+  avata           String?
   status          String?
   displayName     String?         @map("display_name")
   groupIds        String[]        @db.ObjectId
@@ -38,6 +39,7 @@ model Message {
   messageChat     MessageChat         @relation(fields: [messageChatId], references: [id])
   createdAt       DateTime            @default(now()) @map("created_at")
   updatedAt       DateTime            @updatedAt @map("updated_at")
+  @@map("messages")
 }
 
 model Group {
@@ -51,11 +53,11 @@ model Group {
 }
 
 model MessageChat {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  userIds     String[]    @db.ObjectId
-  users       User[]      @relation(fields: [userIds], references: [id])
-  groupId     String?      @db.ObjectId
-  group       Group?       @relation(fields: [groupId], references: [id])
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  userIds     String[]      @db.ObjectId
+  users       User[]        @relation(fields: [userIds], references: [id])
+  groupId     String?       @db.ObjectId
+  group       Group?        @relation(fields: [groupId], references: [id])
   messages    Message[]
   @@map("message_chat")
 }

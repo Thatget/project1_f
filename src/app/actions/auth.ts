@@ -18,7 +18,7 @@ export async function login(state: any, formData: FormData) {
     }
   }
   createSession(user?.id);
-  redirect('/user/23');
+  redirect('/profile');
 }
 
 export async function signup(state: any,formData: FormData) {
