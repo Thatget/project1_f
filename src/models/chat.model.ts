@@ -2,7 +2,6 @@ import { User } from '@prisma/client';
 import prisma from '../lib/prisma';
 
 export type TRUser = Omit<User, 'password'>;
-type TOderBy = 'desc' | 'asc';
 
 export async function getChatContent(chatId: string,skip: number, take: number ) {
   try {
@@ -11,6 +10,9 @@ export async function getChatContent(chatId: string,skip: number, take: number )
       take,
       where: {
         messageChatId: chatId
+      },
+      orderBy: {
+        createdAt: 'desc'
       }
     });
     return messages;

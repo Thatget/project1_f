@@ -59,5 +59,6 @@ model MessageChat {
   groupId     String?       @db.ObjectId
   group       Group?        @relation(fields: [groupId], references: [id])
   messages    Message[]
+  state       String?
   @@map("message_chat")
 }

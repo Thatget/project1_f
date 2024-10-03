@@ -59,7 +59,14 @@ export const ChatBoxContent = ({ authId, chatId }: TChatBoxType) => {
       {messages.map((message) => {
         return (
           <div key={message.id} className="w-full">
-            {message.id === authId ? <p>{message.content}</p> : <p className="float-right">{message.content}</p>}
+            {message.userId === authId ? (
+              <p className="float-right">{message.content}</p>
+            ) : (
+              <div className="flex">
+                <img src="" />
+                <p>{message.content}</p>
+              </div>
+            )}
           </div>
         );
       })}

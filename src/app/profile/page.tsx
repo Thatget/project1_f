@@ -1,6 +1,5 @@
 import { getUserInfo } from '@/src/lib/dtl';
-import Image from 'next/image';
-import { UserAvateForm } from '../ui/user-avate-form';
+import { UserAvateForm } from '../ui/user-avata-form';
 
 export default async function Profile() {
   const user = await getUserInfo();
@@ -19,7 +18,7 @@ export default async function Profile() {
         />
       </div>
       <div className="flex flex-col md:flex-row">
-        <UserAvateForm />
+        <UserAvateForm user={user} />
         <div>
           <div>
             <h2>
@@ -33,8 +32,10 @@ export default async function Profile() {
           </div>
         </div>
         <div className="flex">
-          <button className="m-4 p-1 rounded-md bg-green-500">Thêm vào tin</button>
-          <button className="m-4 p-1 rounded-md bg-green-500">Chỉnh sửa trang cá nhân</button>
+          <div>
+            <button className="m-4 p-1 rounded-md bg-green-500">Thêm vào tin</button>
+            <button className="m-4 p-1 rounded-md bg-green-500">Chỉnh sửa trang cá nhân</button>
+          </div>
         </div>
       </div>
     </div>

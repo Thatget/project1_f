@@ -10,9 +10,9 @@ export function AsideLinks() {
 
   useEffect(() => {
     const listUser = async () => {
-      const list = await fetch('/api/user');
+      const list = await fetch('/api/users');
       const { data } = await list.json();
-      if (data) setUsers((pre) => [...pre, ...data]);
+      if (data) setUsers(data);
     };
     listUser();
   }, []);

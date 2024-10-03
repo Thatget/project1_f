@@ -40,6 +40,10 @@ export async function signup(state: any,formData: FormData) {
  
   // 3. Insert the user into the database or call an Auth Library's API
   const user = await createUser(name, email, password);
+  if(!user) {
+    redirect('sigup');
+  }
+  redirect('/login');
 
   return {
   message: 'An error occurred while creating your account.',
