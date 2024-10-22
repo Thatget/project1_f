@@ -18,6 +18,7 @@ export async function getUserById(userId: string): Promise<{data: TRUser| null}>
       data: null
     }
   }
+  // eslint-disable-next-line no-unused-vars
   const { password: _, ...userWithoutPassword } = user;
   return { data: userWithoutPassword };
   } catch (error) {
@@ -46,6 +47,7 @@ export async function getUser(nickName: string, password: string): Promise<{data
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   const { password: _, ...userWithoutPassword } = user;
   return { data: userWithoutPassword };
   } catch (error) {

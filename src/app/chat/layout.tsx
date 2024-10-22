@@ -1,6 +1,16 @@
+import React from 'react';
 import { getUserInfo } from '@/src/lib/dtl';
 import { AsideLinks } from '../ui/aside-links';
 import { NavLinks } from '../ui/nav-links';
+import { Group, User } from '@prisma/client';
+
+export type TRecipiment =
+  | ({
+      type: 'user';
+    } & Partial<User>)
+  | ({
+      type: 'group';
+    } & Group);
 
 export default async function Layout({ children }: { children: React.ReactNode; params: { slug: string } }) {
   const data = await getUserInfo();

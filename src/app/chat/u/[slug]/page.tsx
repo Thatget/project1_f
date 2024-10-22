@@ -33,11 +33,24 @@ export default async function UserChat(params: any) {
     },
   );
 
+  const userById = unstable_cache(
+    async () => {
+      try {
+        return await prisma.user.findUnique({ where: { id: slug } });
+      } catch (error) {
+        return null;
+      }
+    },
+    [slug],
+    { tags: ['user'], revalidate: 360 },
+  );
+
   const data = await detectChat();
+  const user = await userById();
 
   return (
     <div className="h-full flex flex-row">
-      <ChatBox authId={authId} chatId={data?.id ?? null} />
+      <ChatBox auth={auth} recipiment={{ ...user, type: 'user' }} chatId={data?.id ?? null} />
       <SideInfo />
     </div>
   );

@@ -4,7 +4,7 @@ import { UserAvateForm } from '../ui/user-avata-form';
 export default async function Profile() {
   const user = await getUserInfo();
   return (
-    <div className="container mx-auto">
+    <main className="container mx-auto">
       <h1>Profile</h1>
       <div className="w-full">
         <img
@@ -18,7 +18,7 @@ export default async function Profile() {
         />
       </div>
       <div className="flex flex-col md:flex-row">
-        <UserAvateForm user={user} />
+        {user && <UserAvateForm user={user} />}
         <div>
           <div>
             <h2>
@@ -38,6 +38,6 @@ export default async function Profile() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -2,7 +2,6 @@
 
 import { socket } from '@/src/utils/socket';
 import { Message } from '@prisma/client';
-import { useParams, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 type TChatBoxType = {
@@ -10,19 +9,11 @@ type TChatBoxType = {
   chatId?: string | null;
 };
 export const ChatBoxContent = ({ authId, chatId }: TChatBoxType) => {
-  const router = usePathname();
   const [messages, setMessages] = useState<Message[]>([]);
 
-  const { slug } = useParams<{ slug: string }>();
-  let userId = null;
-  let groupId = null;
-  if (router.startsWith('/chat/u/')) {
-    userId = slug;
-  } else if (router.startsWith('/chat/g/')) {
-    groupId = slug;
-  }
   const fetchMessages = async (page: number) => {
     try {
+      console.log(page);
       const response = await fetch(`/api/chat/${chatId}`);
       if (!response.ok) {
         throw new Error('Failed to fetch messages');

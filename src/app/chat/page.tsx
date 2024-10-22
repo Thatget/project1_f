@@ -7,6 +7,7 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 export default function User(params: any) {
+  // eslint-disable-next-line no-unused-vars
   const { params: ss } = params;
 
   return (

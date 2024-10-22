@@ -2,15 +2,16 @@
 
 import { useCallback, useState } from 'react';
 import UserAvataFormUpload from './user-avata-form-upload';
-import { User } from '@prisma/client';
+import { TRUser } from '@/src/models/user.model';
 
-export const UserAvateForm = ({ user }: { user: User }) => {
+export const UserAvateForm = ({ user }: { user: TRUser }) => {
   const [open, setOpen] = useState(false);
   const handleModal = useCallback(() => {
     setOpen(!open);
   }, [open]);
+
   return (
-    <>
+    <div>
       <div className="rounded-full -mt-20 p-2 flex justify-between">
         <img
           onClick={() => setOpen(true)}
@@ -19,6 +20,6 @@ export const UserAvateForm = ({ user }: { user: User }) => {
         />
       </div>
       <UserAvataFormUpload user={user} modal={open} handleModal={handleModal} />
-    </>
+    </div>
   );
 };

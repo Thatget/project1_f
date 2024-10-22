@@ -42,6 +42,9 @@ appNext.prepare().then(() => {
       } catch(error) {
         socket.to(data.senderId).emit('error',"lỗi gởi tin nhắn!");
       }
+    });
+    socket.on('call', async (payload) => {
+      socket.to(payload.senderId).emit('call', payload);
     })
   });
 

@@ -4,15 +4,20 @@ import { socket } from '@/src/utils/socket';
 import { useParams, usePathname } from 'next/navigation';
 import { KeyboardEvent, useCallback, useEffect, useState } from 'react';
 import { ChatBoxContent } from './chat-box-content';
+import ChatBoxBar from './chat-box-bar';
+import { TRUser } from '@/src/models/user.model';
+import { TRecipiment } from '../chat/layout';
 
 type TChatBoxType = {
-  authId?: string | null;
+  auth?: TRUser | null;
   chatId?: string | null;
+  recipiment?: TRecipiment | null;
 };
 
-export const ChatBox = ({ authId, chatId }: TChatBoxType) => {
+export const ChatBox = ({ auth, recipiment, chatId }: TChatBoxType) => {
   const [message, setMessage] = useState('');
   const router = usePathname();
+  const [cRecipiment, setCrecipient] = useState<TRecipiment | null>(null);
 
   const { slug } = useParams<{ slug: string }>();
   let userId = null;
@@ -23,20 +28,12 @@ export const ChatBox = ({ authId, chatId }: TChatBoxType) => {
     groupId = slug;
   }
 
-  useEffect(() => {
-    socket.connect();
-    socket.emit('join', authId);
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
   const handleSend = useCallback(() => {
     if (message) {
       socket.emit('message', {
         data: {
           message,
-          senderId: authId,
+          senderId: auth?.id,
           recipientId: userId,
           groupId,
           chatId,
@@ -57,11 +54,24 @@ export const ChatBox = ({ authId, chatId }: TChatBoxType) => {
     [handleSend],
   );
 
+  useEffect(() => {
+    if (recipiment) setCrecipient(recipiment);
+  }, [recipiment]);
+
+  useEffect(() => {
+    socket.connect();
+    socket.emit('join', auth?.id);
+    return () => {
+      socket.disconnect();
+    };
+  }, [auth?.id]);
+
   return (
     <div className="relative w-full flex-grow-0 p-2 m-2 bg-white rounded-2xl">
       <div className="h-full">
         <div style={{ height: 'calc(100% - 3rem)' }}>
-          <ChatBoxContent authId={authId} chatId={chatId} />
+          {cRecipiment && <ChatBoxBar recipiment={cRecipiment} />}
+          <ChatBoxContent authId={auth?.id} chatId={chatId} />
         </div>
         <div className="sticky bottom-0 mb-8 h-12">
           <div className="relative w-full">

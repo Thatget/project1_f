@@ -6,6 +6,8 @@ import { login } from '../actions/auth';
 export default function Page() {
   const [state, formAction] = useFormState(login, null);
 
+  console.log('state: ', state);
+
   return (
     <div className="w-full h-full justify-center align-middle flex">
       <div className="mt-16 bg-green-50 w-1/2 rounded-xl">

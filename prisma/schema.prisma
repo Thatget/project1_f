@@ -44,6 +44,8 @@ model Message {
 
 model Group {
   id                    String              @id @default(auto()) @map("_id") @db.ObjectId
+  name                  String
+  logo                  String?
   userIDs               String[]            @db.ObjectId
   users                 User[]              @relation(fields: [userIDs], references: [id])
   createdAt             DateTime            @default(now()) @map("created_at")
