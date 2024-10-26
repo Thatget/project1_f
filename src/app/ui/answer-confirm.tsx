@@ -17,12 +17,15 @@ export const AnswerConfirm = () => {
       'toolbar=no,location=no,status=no,menubar=no,resizable=yes,width=800,height=800,left=600,top=100',
     );
     if (voiceCallWindow) {
-      voiceCallWindow.postMessage(peerSig, '*');
+      console.log('peerSig: ', peerSig);
+      voiceCallWindow.postMessage(
+        JSON.parse(JSON.stringify(peerSig)),
+        'https://3119-2405-4803-fe33-300-88b9-a023-19f3-808d.ngrok-free.app',
+      );
       voiceCallWindow.focus();
     } else {
       alert('Popup blocked! Please allow popups for this site.');
     }
-    setPeerSig(null);
   }, [peerSig, senderId]);
 
   useEffect(() => {
@@ -37,7 +40,6 @@ export const AnswerConfirm = () => {
     };
   }, [socket]);
 
-  console.log('peerSig: ', peerSig);
   return (
     <>
       {peerSig && (

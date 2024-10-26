@@ -69,11 +69,11 @@ export const ChatBox = ({ auth, recipiment, chatId }: TChatBoxType) => {
   return (
     <div className="relative w-full flex-grow-0 p-2 m-2 bg-white rounded-2xl">
       <div className="h-full">
-        <div style={{ height: 'calc(100% - 3rem)' }}>
+        <div className="relative" style={{ height: 'calc(100% - 3rem)' }}>
           {cRecipiment && <ChatBoxBar recipiment={cRecipiment} />}
           <ChatBoxContent authId={auth?.id} chatId={chatId} />
         </div>
-        <div className="sticky bottom-0 mb-8 h-12">
+        <div className="h-12">
           <div className="relative w-full">
             <input
               className="w-full border-2 border-green-500 rounded-xl pt-1 outline-none"

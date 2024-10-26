@@ -36,7 +36,7 @@ export const ChatBoxContent = ({ authId, chatId }: TChatBoxType) => {
       socket.connect();
       socket.emit('join', authId);
       socket.on('message', (data) => {
-        if (data) setMessages((preMessages) => [...preMessages, data]);
+        if (data) setMessages((preMessages) => [data, ...preMessages]);
       });
       return () => {
         socket.off('message');
@@ -46,16 +46,16 @@ export const ChatBoxContent = ({ authId, chatId }: TChatBoxType) => {
   }, [authId, chatId]);
 
   return (
-    <div className="flex flex-col-reverse overflow-auto">
+    <div className="flex flex-col-reverse overflow-auto h-full">
       {messages.map((message) => {
         return (
           <div key={message.id} className="w-full">
             {message.userId === authId ? (
-              <p className="float-right">{message.content}</p>
+              <p className="p-1 m-2 float-right rounded-xl bg-green-800 ">{message.content}</p>
             ) : (
               <div className="flex">
                 <img src="" />
-                <p>{message.content}</p>
+                <p className="p-1 m-2 rounded-xl bg-gray-400">{message.content}</p>
               </div>
             )}
           </div>

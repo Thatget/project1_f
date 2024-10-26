@@ -19,7 +19,13 @@ const handler = appNext.getRequestHandler();
 appNext.prepare().then(() => {
   const app = express();
   const server = createServer(app);
-  const io = new Server(server);
+  const io = new Server(server, {
+    cors: {
+      origin: ["http://localhost:3000", " https://3119-2405-4803-fe33-300-88b9-a023-19f3-808d.ngrok-free.app"],
+      methods: ["GET", "POST"],
+      credentials: false
+    }
+  });
 
   io.on("connection", (socket) => {
     socket.on('join', (authId)=> {
